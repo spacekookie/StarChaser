@@ -1,0 +1,2 @@
+# Module de.katharinasabel.libgdxtutorial.GwtDefinition
+# RPC service class, partial path of RPC policy file
