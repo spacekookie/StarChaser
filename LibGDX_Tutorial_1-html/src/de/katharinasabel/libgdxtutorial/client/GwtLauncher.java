@@ -1,6 +1,7 @@
 package de.katharinasabel.libgdxtutorial.client;
 
-import de.katharinasabel.libgdxtutorial.TutorialLauncher;
+import de.katharinasabel.libgdxtutorial.core.TutorialLauncher;
+
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;

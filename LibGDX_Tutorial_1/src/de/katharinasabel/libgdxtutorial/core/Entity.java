@@ -1,4 +1,4 @@
-package de.katharinasabel.libgdxtutorial;
+package de.katharinasabel.libgdxtutorial.core;
 
 import java.util.Random;
 

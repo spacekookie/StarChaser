@@ -1,6 +1,7 @@
-package de.katharinasabel.libgdxtutorial;
+package de.katharinasabel.libgdxtutorial.core;
 
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -33,7 +34,7 @@ public class InputHandler extends InputAdapter {
 		this.e = e;
 	  }
 	  else {
-		System.out.println("NO PLAYER IN WORLD!");
+		Gdx.app.log("InputHandler", "NO PLAYER IN WORLD!");
 	  }
 	}
   }
@@ -102,12 +103,10 @@ public class InputHandler extends InputAdapter {
   public void update() {
 
 	if (moving) {
-	  Vector2 temp = new Vector2(e.getSelfSprite().getX(), e.getSelfSprite().getY());
+	  Vector2 temp = new Vector2(e.getPosition().x, e.getPosition().y);
 	  temp.add(e.getMovement());
 	  e.setPosition(temp);
 	  e.updatePosition();
-	  // e.getSelfSprite().setPosition(temp.x, temp.y);
-
 	  e.fly();
 	}
 	else {

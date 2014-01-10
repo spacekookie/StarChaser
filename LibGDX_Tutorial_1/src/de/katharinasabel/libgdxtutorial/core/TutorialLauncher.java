@@ -1,4 +1,4 @@
-package de.katharinasabel.libgdxtutorial;
+package de.katharinasabel.libgdxtutorial.core;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
