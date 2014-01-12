@@ -8,11 +8,16 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import de.katharinasabel.libgdxtutorial.objects.Entity;
 import de.katharinasabel.libgdxtutorial.objects.Entity.EntityType;
 import de.katharinasabel.libgdxtutorial.objects.World;
 import de.katharinasabel.libgdxtutorial.util.CameraController;
+import de.katharinasabel.libgdxtutorial.util.InputHandler;
 import de.katharinasabel.libgdxtutorial.util.ResPack;
 
 public class TutorialLauncher implements ApplicationListener {
@@ -28,22 +33,41 @@ public class TutorialLauncher implements ApplicationListener {
   private CameraController camController;
   private InputMultiplexer plex;
 
+  /** UI */
+  private Stage stage;
+  private TextButton menu, inventory;
+  private Table buttons;
+
   @Override
   public void create() {
-	float w = Gdx.graphics.getWidth();
-	float h = Gdx.graphics.getHeight();
 
+	/** Creating and populating the world */
 	world = new World();
 	world.addEntity(new Entity(EntityType.PLAYER, new Vector2(200, 150)));
 	world.addEntity(new Entity(EntityType.STATION, new Vector2(600, 300)));
 	world.addEntity(new Entity(EntityType.PLANET, new Vector2(1200, 600)));
 	world.addEntity(new Entity(EntityType.STAR, new Vector2(650, 750)));
 
+	/** Setting up the camera */
 	camera = new OrthographicCamera();
-	camera.setToOrtho(false, w, h);
 	camera.position.set(0, 0, 0);
 	camera.update();
 
+	/** Setting up the UI */
+	stage = new Stage();
+	buttons = new Table(ResPack._SKIN);
+
+	buttons.setFillParent(true);
+	buttons.top().right();
+
+	menu = new TextButton("Menu", ResPack._SKIN);
+	inventory = new TextButton("Inventory", ResPack._SKIN);
+	buttons.add(inventory);
+	buttons.add(menu);
+
+	stage.addActor(buttons);
+
+	/** Batch renderer, Input and background */
 	batch = new SpriteBatch();
 	plex = new InputMultiplexer();
 
@@ -52,9 +76,8 @@ public class TutorialLauncher implements ApplicationListener {
 	handler = new InputHandler(world);
 	camController = new CameraController(camera);
 
-	// camController.panCamera(world.getEntitityWithType(EntityType.PLAYER).getPosition());
-
 	/** Input Controllers */
+	plex.addProcessor(stage);
 	plex.addProcessor(camController);
 	plex.addProcessor(handler);
 	Gdx.input.setInputProcessor(plex);
@@ -80,15 +103,18 @@ public class TutorialLauncher implements ApplicationListener {
 
 	batch.setProjectionMatrix(camera.combined);
 	batch.begin();
-
 	space.draw(batch);
 	world.update(batch);
 	batch.end();
 
+	stage.act();
+	stage.draw();
   }
 
   @Override
   public void resize(int width, int height) {
+	stage.setViewport(width, height);
+	camera.setToOrtho(false, width, height);
   }
 
   @Override
@@ -97,5 +123,11 @@ public class TutorialLauncher implements ApplicationListener {
 
   @Override
   public void resume() {
+  }
+
+  private void setupListeners() {
+	menu.addListener(new ClickListener() {
+
+	});
   }
 }

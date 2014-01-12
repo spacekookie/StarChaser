@@ -1,4 +1,4 @@
-package de.katharinasabel.libgdxtutorial.core;
+package de.katharinasabel.libgdxtutorial.util;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Gdx;
@@ -32,11 +32,10 @@ public class InputHandler extends InputAdapter {
 	for (Entity e : world.getEntities()) {
 	  if (e.getType() == EntityType.PLAYER) {
 		this.e = e;
-	  }
-	  else {
-		Gdx.app.log("InputHandler", "NO PLAYER IN WORLD!");
+		return;
 	  }
 	}
+	Gdx.app.log("InputHandler", "NO PLAYER IN WORLD!");
   }
 
   public InputHandler(Entity e) {

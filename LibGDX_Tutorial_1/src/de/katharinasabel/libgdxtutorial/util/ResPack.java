@@ -1,8 +1,9 @@
- package de.katharinasabel.libgdxtutorial.util;
+package de.katharinasabel.libgdxtutorial.util;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 /** Class to load all assets for the game */
 public class ResPack {
@@ -11,6 +12,9 @@ public class ResPack {
 	  Gdx.files.internal("graphics/USS_Pixel/packed/USS_Pixel.atlas"));
   private static final TextureAtlas _WORLD = new TextureAtlas(
 	  Gdx.files.internal("graphics/world/packed/world.atlas"));
+
+  /** UI SKIN */
+  public static final Skin _SKIN = new Skin(Gdx.files.internal("data/skin/uiskin.json"));
 
   /** Ship textures */
   public static final TextureRegion SHIP_IDLE = _PIXEL.findRegion("ship_idle");
