@@ -1,6 +1,6 @@
 package de.katharinasabel.libgdxtutorial.core;
 
-import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.GL10;
@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -19,10 +20,10 @@ import de.katharinasabel.libgdxtutorial.objects.World;
 import de.katharinasabel.libgdxtutorial.util.CameraController;
 import de.katharinasabel.libgdxtutorial.util.InputHandler;
 import de.katharinasabel.libgdxtutorial.util.ResPack;
+import de.katharinasabel.starchaser.screens.MenuScreen;
 
-public class TutorialLauncher implements ApplicationListener {
+public class TutorialLauncher extends Game {
 
-  private Entity player;
   private World world;
 
   private static OrthographicCamera camera;
@@ -81,6 +82,9 @@ public class TutorialLauncher implements ApplicationListener {
 	plex.addProcessor(camController);
 	plex.addProcessor(handler);
 	Gdx.input.setInputProcessor(plex);
+
+	this.setupListeners();
+
   }
 
   public static OrthographicCamera getCameraInstance() {
@@ -94,6 +98,7 @@ public class TutorialLauncher implements ApplicationListener {
 
   @Override
   public void render() {
+
 	Gdx.gl.glClearColor(1, 1, 1, 1);
 	Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 
@@ -125,9 +130,27 @@ public class TutorialLauncher implements ApplicationListener {
   public void resume() {
   }
 
+  private TutorialLauncher self;
+  private boolean stop;
+
   private void setupListeners() {
+	self = this;
+
 	menu.addListener(new ClickListener() {
 
+	  public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+		stop = true;
+		MenuScreen screen = new MenuScreen(self);
+		self.setScreen(screen);
+		// screen.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		// screen.show();
+	  }
+	});
+	inventory.addListener(new ClickListener() {
+
+	  public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+		Gdx.app.log("Stage", "Inventory button pressed");
+	  }
 	});
   }
 }
