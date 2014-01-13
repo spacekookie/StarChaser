@@ -2,30 +2,29 @@ package de.katharinasabel.starchaser.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
-import de.katharinasabel.libgdxtutorial.core.TutorialLauncher;
-import de.katharinasabel.libgdxtutorial.util.ResPack;
+import de.katharinasabel.starchaser.util.ResPack;
 
 public class MenuScreen implements Screen {
-
-  private TutorialLauncher self;
 
   private Stage stage;
   private Table table;
   private Label title;
 
-  public MenuScreen(TutorialLauncher self) {
-	this.self = self;
+  public MenuScreen() {
   }
 
   @Override
   public void render(float delta) {
-	Gdx.gl.glClearColor(0.5f, 0.5f, 0.5f, 1);
-	Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+	Gdx.gl20.glEnable(GL20.GL_BLEND);
+	Gdx.gl20.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+
+	Gdx.gl20.glClearColor(0, 0, 0, 0.5f);
+	Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 	stage.act();
 	stage.draw();
@@ -41,6 +40,7 @@ public class MenuScreen implements Screen {
 	stage = new Stage();
 	table = new Table(ResPack._SKIN);
 	title = new Label("MAIN MENU", ResPack._SKIN);
+
 	table.add(title);
 	table.setFillParent(true);
 	table.center();

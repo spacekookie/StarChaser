@@ -1,4 +1,4 @@
-package de.katharinasabel.libgdxtutorial.objects;
+package de.katharinasabel.starchaser.objects;
 
 import java.util.HashSet;
 import java.util.Set;

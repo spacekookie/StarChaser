@@ -1,4 +1,4 @@
-package de.katharinasabel.libgdxtutorial.util;
+package de.katharinasabel.starchaser.util;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Gdx;
@@ -6,9 +6,9 @@ import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 
-import de.katharinasabel.libgdxtutorial.objects.Entity;
-import de.katharinasabel.libgdxtutorial.objects.Entity.EntityType;
-import de.katharinasabel.libgdxtutorial.objects.World;
+import de.katharinasabel.starchaser.objects.Entity;
+import de.katharinasabel.starchaser.objects.World;
+import de.katharinasabel.starchaser.objects.Entity.EntityType;
 
 public class InputHandler extends InputAdapter {
 

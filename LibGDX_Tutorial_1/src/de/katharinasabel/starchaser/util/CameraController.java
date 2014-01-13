@@ -1,4 +1,4 @@
-package de.katharinasabel.libgdxtutorial.util;
+package de.katharinasabel.starchaser.util;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;

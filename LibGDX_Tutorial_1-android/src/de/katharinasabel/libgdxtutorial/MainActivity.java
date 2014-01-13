@@ -5,7 +5,7 @@ import android.os.Bundle;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 
-import de.katharinasabel.libgdxtutorial.core.TutorialLauncher;
+import de.katharinasabel.starchaser.core.StarChaser;
 
 public class MainActivity extends AndroidApplication {
     @Override
@@ -15,6 +15,6 @@ public class MainActivity extends AndroidApplication {
         AndroidApplicationConfiguration cfg = new AndroidApplicationConfiguration();
         cfg.useGL20 = false;
         
-        initialize(new TutorialLauncher(), cfg);
+        initialize(new StarChaser(), cfg);
     }
 }

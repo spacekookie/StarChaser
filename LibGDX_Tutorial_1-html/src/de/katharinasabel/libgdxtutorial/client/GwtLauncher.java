@@ -1,6 +1,6 @@
 package de.katharinasabel.libgdxtutorial.client;
 
-import de.katharinasabel.libgdxtutorial.core.TutorialLauncher;
+import de.katharinasabel.starchaser.core.StarChaser;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
@@ -15,6 +15,6 @@ public class GwtLauncher extends GwtApplication {
 
   @Override
   public ApplicationListener getApplicationListener() {
-	return new TutorialLauncher();
+	return new StarChaser();
   }
 }

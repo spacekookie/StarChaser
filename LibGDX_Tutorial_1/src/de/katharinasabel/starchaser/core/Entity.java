@@ -1,4 +1,4 @@
-package de.katharinasabel.libgdxtutorial.core;
+package de.katharinasabel.starchaser.core;
 
 import java.util.Random;
 
@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
-import de.katharinasabel.libgdxtutorial.util.ResPack;
+import de.katharinasabel.starchaser.util.ResPack;
 
 public class Entity {
 

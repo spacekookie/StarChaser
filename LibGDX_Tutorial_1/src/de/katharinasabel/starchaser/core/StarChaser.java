@@ -1,4 +1,4 @@
-package de.katharinasabel.libgdxtutorial.core;
+package de.katharinasabel.starchaser.core;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -14,15 +14,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
-import de.katharinasabel.libgdxtutorial.objects.Entity;
-import de.katharinasabel.libgdxtutorial.objects.Entity.EntityType;
-import de.katharinasabel.libgdxtutorial.objects.World;
-import de.katharinasabel.libgdxtutorial.util.CameraController;
-import de.katharinasabel.libgdxtutorial.util.InputHandler;
-import de.katharinasabel.libgdxtutorial.util.ResPack;
+import de.katharinasabel.starchaser.objects.Entity;
+import de.katharinasabel.starchaser.objects.World;
+import de.katharinasabel.starchaser.objects.Entity.EntityType;
 import de.katharinasabel.starchaser.screens.MenuScreen;
+import de.katharinasabel.starchaser.util.CameraController;
+import de.katharinasabel.starchaser.util.InputHandler;
+import de.katharinasabel.starchaser.util.ResPack;
 
-public class TutorialLauncher extends Game {
+public class StarChaser extends Game {
 
   private World world;
 
@@ -99,21 +99,30 @@ public class TutorialLauncher extends Game {
   @Override
   public void render() {
 
-	Gdx.gl.glClearColor(1, 1, 1, 1);
-	Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+	/** Clear bg with black */
+	Gdx.gl20.glClearColor(0, 0, 0, 1);
+	Gdx.gl20.glClear(GL10.GL_COLOR_BUFFER_BIT);
 
+	/** Update camera and input */
 	handler.update();
 	camController.update();
 	camController.panCamera(world.getEntitityWithType(EntityType.PLAYER).getPosition());
 
+	/** Draw space background */
 	batch.setProjectionMatrix(camera.combined);
 	batch.begin();
 	space.draw(batch);
+
+	/** Update and render game world */
 	world.update(batch);
 	batch.end();
 
+	/** Update and draw UI */
 	stage.act();
 	stage.draw();
+
+	/** Call to ensure render() is called inF sub-sceen */
+	super.render();
   }
 
   @Override
@@ -130,7 +139,7 @@ public class TutorialLauncher extends Game {
   public void resume() {
   }
 
-  private TutorialLauncher self;
+  private StarChaser self;
   private boolean stop;
 
   private void setupListeners() {
@@ -140,7 +149,7 @@ public class TutorialLauncher extends Game {
 
 	  public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
 		stop = true;
-		MenuScreen screen = new MenuScreen(self);
+		MenuScreen screen = new MenuScreen();
 		self.setScreen(screen);
 		// screen.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		// screen.show();
