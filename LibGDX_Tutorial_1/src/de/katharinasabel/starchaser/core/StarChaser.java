@@ -5,24 +5,33 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 import de.katharinasabel.starchaser.objects.Entity;
-import de.katharinasabel.starchaser.objects.World;
 import de.katharinasabel.starchaser.objects.Entity.EntityType;
+import de.katharinasabel.starchaser.objects.World;
 import de.katharinasabel.starchaser.screens.MenuScreen;
 import de.katharinasabel.starchaser.util.CameraController;
 import de.katharinasabel.starchaser.util.InputHandler;
 import de.katharinasabel.starchaser.util.ResPack;
 
 public class StarChaser extends Game {
+  private StarChaser self = this;
 
   private World world;
 
@@ -32,12 +41,15 @@ public class StarChaser extends Game {
 
   private InputHandler handler;
   private CameraController camController;
-  private InputMultiplexer plex;
+  public InputMultiplexer plex;
 
   /** UI */
   private Stage stage;
   private TextButton menu, inventory;
   private Table buttons;
+
+  /** Screens */
+  private MenuScreen menuScreen;
 
   @Override
   public void create() {
@@ -57,6 +69,9 @@ public class StarChaser extends Game {
 	/** Setting up the UI */
 	stage = new Stage();
 	buttons = new Table(ResPack._SKIN);
+
+	/** Setting up support screens */
+	menuScreen = new MenuScreen(self);
 
 	buttons.setFillParent(true);
 	buttons.top().right();
@@ -81,10 +96,13 @@ public class StarChaser extends Game {
 	plex.addProcessor(stage);
 	plex.addProcessor(camController);
 	plex.addProcessor(handler);
+	this.setupInput();
+  }
+
+  public void setupInput() {
+
 	Gdx.input.setInputProcessor(plex);
-
 	this.setupListeners();
-
   }
 
   public static OrthographicCamera getCameraInstance() {
@@ -139,26 +157,17 @@ public class StarChaser extends Game {
   public void resume() {
   }
 
-  private StarChaser self;
-  private boolean stop;
-
   private void setupListeners() {
-	self = this;
 
 	menu.addListener(new ClickListener() {
 
 	  public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-		stop = true;
-		MenuScreen screen = new MenuScreen();
-		self.setScreen(screen);
-		// screen.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		// screen.show();
+		self.setScreen(menuScreen);
 	  }
 	});
 	inventory.addListener(new ClickListener() {
 
 	  public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-		Gdx.app.log("Stage", "Inventory button pressed");
 	  }
 	});
   }

@@ -8,7 +8,7 @@ import de.katharinasabel.starchaser.core.StarChaser;
 public class Main {
   public static void main(String[] args) {
 	LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
-	cfg.title = "LibGDX_Tutorial_1";
+	cfg.title = "Star Chaser!";
 	cfg.resizable = false;
 	cfg.useGL20 = true;
 	cfg.width = 1280;
